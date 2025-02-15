@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package event;
+
+option go_package = "github.com/Inspirate789/grpc-template/internal/event/delivery";
+
+import "google/protobuf/timestamp.proto";
+
+message Event {
+    uint64 id = 1;
+    string name = 2;
+    google.protobuf.Timestamp timestamp = 3;
+    repeated uint64 user_ids = 4;
+}
+
+message CreateEventRequest {
+    string name = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    repeated uint64 user_ids = 3;
+}
+
+message CreateEventResponse {
+    uint64 id = 1;
+}
+
+message UpdateEventRequest {
+    Event event = 1;
+}
+
+message UpdateEventResponse {}
+
+message DeleteEventRequest {
+    uint64 id = 1;
+}
+
+message DeleteEventResponse {}
+
+message GetEventRequest {
+    uint64 id = 1;
+}
+
+message GetEventResponse {
+    Event event = 1;
+}
+
+message ListEventsRequest {
+    optional uint64 limit = 1;
+    optional uint64 offset = 2;
+    optional uint64 user_id = 3;
+}
+
+message ListEventsResponse {
+    repeated Event events = 1;
+    uint64 total_count = 2;
+}
+
+service EventService {
+    rpc CreateEvent (CreateEventRequest) returns (CreateEventResponse);
+    rpc UpdateEvent (UpdateEventRequest) returns (UpdateEventResponse);
+    rpc DeleteEvent (DeleteEventRequest) returns (DeleteEventResponse);
+    rpc GetEvent (GetEventRequest) returns (GetEventResponse);
+    rpc GetEvents (ListEventsRequest) returns (ListEventsResponse);
+}

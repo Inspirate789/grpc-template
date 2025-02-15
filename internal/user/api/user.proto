@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/Inspirate789/grpc-template/internal/user/delivery";
+
+message User {
+    uint64 id = 1;
+    string name = 2;
+}
+
+message CreateUserRequest {
+    string name = 1;
+}
+
+message CreateUserResponse {
+    uint64 id = 1;
+}
+
+message UpdateUserRequest {
+    User user = 1;
+}
+
+message UpdateUserResponse {}
+
+message DeleteUserRequest {
+    uint64 id = 1;
+}
+
+message DeleteUserResponse {}
+
+message GetUserRequest {
+    uint64 id = 1;
+}
+
+message GetUserResponse {
+    User user = 1;
+}
+
+message ListUsersRequest {
+    optional uint64 limit = 1;
+    optional uint64 offset = 2;
+    optional uint64 event_id = 3;
+}
+
+message ListUsersResponse {
+    repeated User users = 1;
+    uint64 total_count = 2;
+}
+
+service UserService {
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+    rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
+    rpc GetUsers (ListUsersRequest) returns (ListUsersResponse);
+}

@@ -1,0 +1,12 @@
+logging:
+  level: -4 # -4: debug, 0: info, 4: warn, 8: error
+web:
+  host:
+  port: 8080
+  pathPrefix: /api/v1
+grpc:
+  host:
+  port: 5050
+db:
+  driverName: sqlite3
+  connectionString: data/data.db
