@@ -31,7 +31,6 @@ go.work.sum
 
 data
 
-app
 main
 
 .DS_Store
